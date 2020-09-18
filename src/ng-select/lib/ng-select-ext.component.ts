@@ -63,6 +63,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
   @Input() displayActionButtons = true;
   // data change event will only emit if selection changed.
   @Input() emitDataChange = true;
+  @Input() hideDisabled = true;
   @Input() bindLabel = 'name';
   @Input() bindValue = 'id';
 
@@ -94,6 +95,8 @@ export class NgSelectExtComponent extends NgSelectComponent {
     this.clearOnBackspace = false;
     this.virtualScroll = true;
     this.appendTo = 'body';
+    this.hideDisabled = true;
+    this.disableSort = false;
   }
 
   ngOnInit() {
@@ -146,7 +149,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
   close() {
     super.close();
-
+    this.focus();
     if (this.displayActionButtons) {
       if (!this.commit_changes) {
         this._handleWriteValue(this.initial_state);
@@ -227,11 +230,13 @@ export class NgSelectExtComponent extends NgSelectComponent {
     }
     if (this.emitDataChange) {
       let initial_selections = [];
-      initial_selections = Array.isArray(this.initial_state)
-        ? this.initial_state
-        : this.initial_state['items']
-        ? this.initial_state['items']
-        : [this.initial_state];
+      if (this.initial_state) {
+        initial_selections = Array.isArray(this.initial_state)
+          ? this.initial_state
+          : this.initial_state['items']
+          ? this.initial_state['items']
+          : [this.initial_state];
+      }
       const current_selection_str = JSON.stringify(model.sort());
       const initial_selection_str = JSON.stringify(initial_selections.sort());
       if (current_selection_str !== initial_selection_str) {
