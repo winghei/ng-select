@@ -54,7 +54,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
   // number of selections allowed, otherwise show  n / Total
   @Input() displayLimit = 3;
   // allow excluded items as value model if total unselected is lower than selected
-  @Input() isExclusive: true;
+  @Input() isExclusive = true;
   // ignore isExclusive and will use selected as value model
   @Input() exclusionTreshold = 100;
   // directly manipulate selected property of item items and set selection based on selected items. It will ignore
