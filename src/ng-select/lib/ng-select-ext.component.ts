@@ -200,6 +200,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
         }
       }
     }
+    model = model.sort();
     const selected = this.selectedItems.map((x) => x.value);
 
     if (this.isExclusive) {
@@ -216,7 +217,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
         model = {
           exclude: 1,
-          items: unselected_items,
+          items: unselected_items.sort(),
         };
       }
     }
@@ -229,16 +230,8 @@ export class NgSelectExtComponent extends NgSelectComponent {
       this.changeEvent.emit(selected[0]);
     }
     if (this.emitDataChange) {
-      let initial_selections = [];
-      if (this.initial_state) {
-        initial_selections = Array.isArray(this.initial_state)
-          ? this.initial_state
-          : this.initial_state['items']
-          ? this.initial_state['items']
-          : [this.initial_state];
-      }
-      const current_selection_str = JSON.stringify(model.sort());
-      const initial_selection_str = JSON.stringify(initial_selections.sort());
+      const current_selection_str = JSON.stringify(model);
+      const initial_selection_str = JSON.stringify(this.initial_state);
       if (current_selection_str !== initial_selection_str) {
         this.dataChangeEvent.emit(selected);
       }
