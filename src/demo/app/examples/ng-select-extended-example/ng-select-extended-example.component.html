@@ -1,0 +1,14 @@
+<p>Extended ng-select:
+    -added default header tempalte
+</p>
+
+<ng-select-ext
+    [items]="people"
+    [multiple]="true"
+    (dataChange)="dataChange($event)"
+    [(ngModel)]="selectedPeople">
+   
+</ng-select-ext>
+
+<br>
+<small>{{selectedPeople.length <= 3  || selectedPeople.items ? (selectedPeople | json) : selectedPeople.length}}</small>

@@ -203,9 +203,9 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
         return this.editableSearchTerm && !this.multiple;
     }
 
-    private readonly _destroy$ = new Subject<void>();
-    private readonly _keyPress$ = new Subject<string>();
-    private _onChange = (_: any) => { };
+    protected readonly _destroy$ = new Subject<void>();
+    protected readonly _keyPress$ = new Subject<string>();
+    protected _onChange = (_: any) => { };
     private _onTouched = () => { };
 
     clearItem = (item: any) => {
@@ -219,7 +219,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
         config: NgSelectConfig,
         @Inject(SELECTION_MODEL_FACTORY) newSelectionModel: SelectionModelFactory,
         _elementRef: ElementRef<HTMLElement>,
-        private _cd: ChangeDetectorRef,
+        protected _cd: ChangeDetectorRef,
         private _console: ConsoleService
     ) {
         this._mergeGlobalConfig(config);
@@ -674,7 +674,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
             });
     }
 
-    private _isValidWriteValue(value: any): boolean {
+    protected _isValidWriteValue(value: any): boolean {
         if (!isDefined(value) || (this.multiple && value === '') || Array.isArray(value) && value.length === 0) {
             return false;
         }
@@ -700,7 +700,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
         }
     }
 
-    private _handleWriteValue(ngModel: any | any[]) {
+    protected _handleWriteValue(ngModel: any | any[]) {
         if (!this._isValidWriteValue(ngModel)) {
             return
         }
@@ -771,7 +771,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
         }
     }
 
-    private _updateNgModel() {
+    protected _updateNgModel() {
         const model = [];
         for (const item of this.selectedItems) {
             if (this.bindValue) {

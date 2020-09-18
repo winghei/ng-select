@@ -18,6 +18,7 @@ import {
     NgTypeToSearchTemplateDirective
 } from './ng-templates.directive';
 import { DefaultSelectionModelFactory } from './selection-model';
+import { NgSelectExtComponent } from './ng-select-ext.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { DefaultSelectionModelFactory } from './selection-model';
         NgLoadingTextTemplateDirective,
         NgTagTemplateDirective,
         NgLoadingSpinnerTemplateDirective,
-        NgItemLabelDirective
+        NgItemLabelDirective,
+        NgSelectExtComponent
     ],
     imports: [
         CommonModule
@@ -53,7 +55,8 @@ import { DefaultSelectionModelFactory } from './selection-model';
         NgTypeToSearchTemplateDirective,
         NgLoadingTextTemplateDirective,
         NgTagTemplateDirective,
-        NgLoadingSpinnerTemplateDirective
+        NgLoadingSpinnerTemplateDirective,
+        NgSelectExtComponent
     ],
     providers: [
         { provide: SELECTION_MODEL_FACTORY, useValue: DefaultSelectionModelFactory }

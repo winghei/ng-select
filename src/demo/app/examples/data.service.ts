@@ -54,6 +54,25 @@ export class DataService {
         }
         return of(items).pipe(delay(500));
     }
+    
+    getMockItems(cnt) {
+        return generateMockPeople(cnt);
+    }
+}
+
+function generateMockPeople(cnt) {
+    let people = [];
+    for (let i = 0; i < cnt; i++) {
+        people.push({
+            'id': people.length,
+            'index': people.length,
+            'isActive': true,
+            'picture': 'http://placehold.it/32x32',
+            'age': 23,
+            'name': 'Person' + i,
+        })
+    }
+    return people
 }
 
 function getMockPeople() {

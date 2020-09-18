@@ -1,5 +1,5 @@
 {
-  "repository": "ng-select/ng-select",
+  "repository": "winghei/ng-select",
   "engines": {
     "node": ">= 6.9.0",
     "npm": ">= 3.0.0"
@@ -17,7 +17,8 @@
     "coveralls": "cat ./coverage/ng-select/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "ng lint ng-select",
     "postpublish": "cp -r dist/ng-select/package.json src/ng-select",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "commit": "git-cz"
   },
   "release": {
     "branch": "master",
@@ -63,6 +64,7 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "coveralls": "^3.0.2",
+    "cz-conventional-changelog": "^3.3.0",
     "gh-pages-travis": "^1.0.4",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -79,5 +81,10 @@
     "tsickle": "^0.39.1",
     "tslint": "~6.1.0",
     "typescript": "~3.9.7"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

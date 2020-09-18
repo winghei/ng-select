@@ -1,3 +1,5 @@
+import { NgSelectExtendedSingleSelectComponent } from './ng-select-extended-single-select/ng-select-extended-single-select.component';
+import { NgSelectExtendedExampleComponent } from './ng-select-extended-example/ng-select-extended-example.component';
 import { DataSourceBackendExampleComponent } from './data-source-backend-example/data-source-backend-example.component';
 import { DataSourceArrayExampleComponent } from './data-source-array-example/data-source-array-example.component';
 import { DataSourceOptionsExampleComponent } from './data-source-options-example/data-source-options-example.component';
@@ -41,6 +43,7 @@ import { GroupSelectableExampleComponent } from './group-selectable-example/grou
 import { GroupSelectableHiddenExampleComponent } from './group-selectable-hidden-example/group-selectable-hidden-example.component';
 import { GroupChildrenExampleComponent } from './group-children-example/group-children-example.component';
 import { SearchEditableExampleComponent } from './search-editable-example/search-editable-example.component';
+
 
 export interface Example {
     component: any;
@@ -219,5 +222,13 @@ export const EXAMPLE_COMPONENTS: { [key: string]: Example } = {
     'group-children-example': {
         component: GroupChildrenExampleComponent,
         title: 'Items with already grouped children array'
+    },
+    'extended-example': {
+        component:NgSelectExtendedExampleComponent,
+        title: 'Extended NgSelect'
+    },
+    'extended-example-single': {
+        component:NgSelectExtendedSingleSelectComponent,
+        title: 'Extended NgSelect'
     }
 };

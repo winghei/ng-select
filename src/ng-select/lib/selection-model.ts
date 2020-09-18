@@ -14,7 +14,7 @@ export interface SelectionModel {
 }
 
 export class DefaultSelectionModel implements SelectionModel {
-    private _selected: NgOption[] = [];
+    protected _selected: NgOption[] = [];
 
     get value(): NgOption[] {
         return this._selected;

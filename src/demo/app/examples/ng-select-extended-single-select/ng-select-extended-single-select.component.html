@@ -1,0 +1,11 @@
+<p>Extended ng-select as Single Select
+</p>
+
+<ng-select-ext
+    [items]="people"
+    [(ngModel)]="selectedPeople">
+   
+</ng-select-ext>
+
+<br>
+<small>{{selectedPeople | json}}</small>
