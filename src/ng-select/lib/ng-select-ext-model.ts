@@ -1,8 +1,7 @@
-import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
-import { ItemsList } from "./items-list";
-import { NgSelectComponent } from "./ng-select.component";
-import { NgOption } from "./ng-select.types";
-import { DefaultSelectionModel, SelectionModel } from "./selection-model";
+import { ItemsList } from './items-list';
+import { NgSelectComponent } from './ng-select.component';
+import { NgOption } from './ng-select.types';
+import { DefaultSelectionModel, SelectionModel } from './selection-model';
 
 export function DefaultSelectionModelExtFactory() {
   return new DefaultSelectionModelExt();
