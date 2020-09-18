@@ -21,7 +21,7 @@
     "commit": "git-cz"
   },
   "release": {
-    "branch": "master",
+    "branch": "ng-select-ext",
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/changelog",
