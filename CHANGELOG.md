@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.2](https://github.com/winghei/ng-select/compare/v5.1.1...v5.1.2) (2020-09-18)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** tab navigation focus when search panel is appended to body ([42f32cd](https://github.com/winghei/ng-select/commit/42f32cd1d17639a6201d69e2804a110fca42effe))
+
 ### [5.1.1](https://github.com/winghei/ng-select/compare/v5.1.0...v5.1.1) (2020-09-18)
 
 
