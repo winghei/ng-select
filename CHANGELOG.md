@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.3](https://github.com/winghei/ng-select/compare/v5.1.2...v5.1.3) (2020-09-18)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** typo on default value for isExclusive ([584aad8](https://github.com/winghei/ng-select/commit/584aad89ef9193757b07ec7fc1d5c9d8fa196cef))
+
 ### [5.1.2](https://github.com/winghei/ng-select/compare/v5.1.1...v5.1.2) (2020-09-18)
 
 
