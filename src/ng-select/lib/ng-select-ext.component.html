@@ -134,6 +134,7 @@
   [markedItem]="itemsList.markedItem"
   (update)="viewPortItems = $event"
   (scroll)="scroll.emit($event)"
+  (keydown)="handleKeyDown($event)"
   (scrollToEnd)="scrollToEnd.emit($event)"
   (outsideClick)="commit_changes=true;close()"
   [class.ng-select-multiple]="multiple"

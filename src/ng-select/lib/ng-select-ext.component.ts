@@ -93,6 +93,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
     this.searchable = false;
     this.clearOnBackspace = false;
     this.virtualScroll = true;
+    this.appendTo = 'body';
   }
 
   ngOnInit() {
@@ -198,20 +199,6 @@ export class NgSelectExtComponent extends NgSelectComponent {
     }
     const selected = this.selectedItems.map((x) => x.value);
 
-    if (this.emitDataChange) {
-      let initial_selections = [];
-      initial_selections = Array.isArray(this.initial_state)
-        ? this.initial_state
-        : this.initial_state['items']
-        ? this.initial_state['items']
-        : [this.initial_state];
-      const current_selection_str = JSON.stringify(model.sort());
-      const initial_selection_str = JSON.stringify(initial_selections.sort());
-      if (current_selection_str !== initial_selection_str) {
-        this.dataChangeEvent.emit(selected);
-      }
-    }
-
     if (this.isExclusive) {
       if (
         this.selectedItems.length > this.exclusionTreshold &&
@@ -230,7 +217,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
         };
       }
     }
-    this.initial_state = model;
+
     if (this.multiple) {
       this._onChange(model);
       this.changeEvent.emit(selected);
@@ -238,7 +225,21 @@ export class NgSelectExtComponent extends NgSelectComponent {
       this._onChange(isDefined(model[0]) ? model[0] : null);
       this.changeEvent.emit(selected[0]);
     }
+    if (this.emitDataChange) {
+      let initial_selections = [];
+      initial_selections = Array.isArray(this.initial_state)
+        ? this.initial_state
+        : this.initial_state['items']
+        ? this.initial_state['items']
+        : [this.initial_state];
+      const current_selection_str = JSON.stringify(model.sort());
+      const initial_selection_str = JSON.stringify(initial_selections.sort());
+      if (current_selection_str !== initial_selection_str) {
+        this.dataChangeEvent.emit(selected);
+      }
+    }
 
+    this.initial_state = model;
     this._cd.markForCheck();
   }
   protected _isValidWriteValueExt(value: any): boolean {
