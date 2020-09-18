@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.1](https://github.com/winghei/ng-select/compare/v5.1.0...v5.1.1) (2020-09-18)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** dataChange event emitted before value is changed ([01f9f88](https://github.com/winghei/ng-select/commit/01f9f8829b7b5b266763ef2413f7504d6ade32ff))
+
 ## [5.1.0](https://github.com/winghei/ng-select/compare/v5.0.1...v5.1.0) (2020-09-18)
 
 
