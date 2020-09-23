@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.1.5](https://github.com/winghei/ng-select/compare/v5.1.4...v5.1.5) (2020-09-23)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** 0 value on single select is not handled on write ([08eb445](https://github.com/winghei/ng-select/commit/08eb4450c55dff9c101e4d554dd6e2a37cee2c52))
+
 ### [5.1.4](https://github.com/winghei/ng-select/compare/v5.1.3...v5.1.4) (2020-09-18)
 
 
