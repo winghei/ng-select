@@ -260,7 +260,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
   }
 
   protected _handleWriteValue(ngModel: any | any[]) {
-    if (!ngModel || !this._isValidWriteValueExt(ngModel)) {
+    if (ngModel == undefined || !this._isValidWriteValueExt(ngModel)) {
       return;
     }
 
