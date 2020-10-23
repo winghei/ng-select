@@ -429,6 +429,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
             return;
         }
         this.isOpen = false;
+        this._isComposing = false;
         if (!this._editableSearchTerm) {
             this._clearSearch();
         } else {
