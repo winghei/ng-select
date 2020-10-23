@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/winghei/ng-select/compare/v5.0.8...v5.2.0) (2020-10-23)
+
+
+### Bug Fixes
+
+* **dropdown-panel:** fixed issue updating position when appendedToBody ([1b023ac](https://github.com/winghei/ng-select/commit/1b023acfe16113511b5e0a1db3a3837ab1fa485e))
+
+### [5.1.5](https://github.com/winghei/ng-select/compare/v5.1.4...v5.1.5) (2020-09-23)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** 0 value on single select is not handled on write ([08eb445](https://github.com/winghei/ng-select/commit/08eb4450c55dff9c101e4d554dd6e2a37cee2c52))
+
+### [5.1.4](https://github.com/winghei/ng-select/compare/v5.1.3...v5.1.4) (2020-09-18)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** dataChange event breaking comparison check ([92f5bee](https://github.com/winghei/ng-select/commit/92f5bee57470c07786d5363fe3321a5cda8c9d18))
+
+### [5.1.3](https://github.com/winghei/ng-select/compare/v5.1.2...v5.1.3) (2020-09-18)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** typo on default value for isExclusive ([584aad8](https://github.com/winghei/ng-select/commit/584aad89ef9193757b07ec7fc1d5c9d8fa196cef))
+
+### [5.1.2](https://github.com/winghei/ng-select/compare/v5.1.1...v5.1.2) (2020-09-18)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** tab navigation focus when search panel is appended to body ([42f32cd](https://github.com/winghei/ng-select/commit/42f32cd1d17639a6201d69e2804a110fca42effe))
+
+### [5.1.1](https://github.com/winghei/ng-select/compare/v5.1.0...v5.1.1) (2020-09-18)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** dataChange event emitted before value is changed ([01f9f88](https://github.com/winghei/ng-select/commit/01f9f8829b7b5b266763ef2413f7504d6ade32ff))
+
+## [5.1.0](https://github.com/winghei/ng-select/compare/v5.0.3...v5.1.0) (2020-09-18)
+
+
+### Features
+
+* **ng-select-ext:** extended `ng-selet` as `ng-select-ext` to reduce boilerplates and improve perf ([71ea3af](https://github.com/winghei/ng-select/commit/71ea3afea4f6048949ec795926683625b11f2ed4))
+
 ### [5.1.5](https://github.com/winghei/ng-select/compare/v5.1.4...v5.1.5) (2020-09-23)
 
 
