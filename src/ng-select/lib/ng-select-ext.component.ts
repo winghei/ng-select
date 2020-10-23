@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostListener,
   Inject,
   Input,
   Output,
@@ -78,6 +79,13 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
   @ViewChild('inlineSearchInput') inlineSearchInput: ElementRef<HTMLInputElement>;
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (this.isOpen) {
+      this.dropdownPanel.adjustPosition();
+      this.dropdownPanel._updateXPosition();
+    }
+  }
   constructor(
     @Attribute('class') classes: string,
     config: NgSelectConfig,
@@ -128,6 +136,10 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
   open() {
     super.open();
+    if (this.disabled || this.isOpen || this.itemsList.maxItemsSelected) {
+      return;
+    }
+
     const input = this.inlineSearchInput.nativeElement;
     const attributes = {
       type: 'text',
