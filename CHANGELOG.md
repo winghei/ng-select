@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.2.1](https://github.com/winghei/ng-select/compare/v5.2.0...v5.2.1) (2020-10-29)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** enabled auto-dropdown list on keypress and set input text ([42de414](https://github.com/winghei/ng-select/commit/42de414886d67c7ad95ea51e00bb99b1a59d36a3))
+
 ## [5.2.0](https://github.com/winghei/ng-select/compare/v5.0.8...v5.2.0) (2020-10-23)
 
 
