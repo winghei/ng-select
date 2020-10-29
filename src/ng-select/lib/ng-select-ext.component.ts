@@ -136,7 +136,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
   open() {
     super.open();
-    if (this.disabled || this.isOpen || this.itemsList.maxItemsSelected) {
+    if (this.disabled) {
       return;
     }
 
