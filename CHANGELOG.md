@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.2.2](https://github.com/winghei/ng-select/compare/v5.2.1...v5.2.2) (2020-11-02)
+
+
+### Bug Fixes
+
+* **ng-select-ext:** moved autoSort to fix highlighting issue ([f08c900](https://github.com/winghei/ng-select/commit/f08c90036be05e21cab1f07183f8d7bdd79933fe))
+
 ### [5.2.1](https://github.com/winghei/ng-select/compare/v5.2.0...v5.2.1) (2020-10-29)
 
 
