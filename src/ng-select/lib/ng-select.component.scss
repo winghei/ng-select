@@ -92,6 +92,7 @@
             .ng-value-container {
                 @include wrapt-text;
                 .ng-value {
+                    z-index: 1;
                     @include wrapt-text;
                     .ng-value-icon {
                         display: none;

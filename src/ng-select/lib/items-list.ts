@@ -59,10 +59,6 @@ export class ItemsList {
 
   setItems(items: any[]) {
     this._items = items.map((item, index) => this.mapItem(item, index));
-    if (!this._ngSelect.disableSort)
-      this._items.sort((a, b) => {
-        return a.label.localeCompare(b.label);
-      });
 
     if (this._ngSelect.groupBy) {
       this._groups = this._groupBy(this._items, this._ngSelect.groupBy);

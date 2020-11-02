@@ -126,8 +126,16 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
     get items() { return this._items };
 
     set items(value: any[]) {
+        let _value = value.concat();
         this._itemsAreUsed = true;
-        this._items = value;
+       
+        if (!this.disableSort) {  
+            _value = _value.sort((a, b) => {
+                return a[this.bindLabel].localeCompare(b[this.bindLabel]);
+            });
+        }
+    
+        this._items = _value;
     };
 
     @Input()
@@ -630,6 +638,11 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
         const firstItem = items[0];
         this.bindLabel = this.bindLabel || this._defaultLabel;
         this._primitive = isDefined(firstItem) ? !isObject(firstItem) : this._primitive || this.bindLabel === this._defaultLabel;
+        if (!this.disableSort) {  
+            items = items.sort((a, b) => {
+                return a[this.bindLabel].localeCompare(b[this.bindLabel]);
+            });
+        }
         this.itemsList.setItems(items);
         if (items.length > 0 && this.hasValue) {
             this.itemsList.mapSelectedItems();
