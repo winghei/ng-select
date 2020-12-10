@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.2.3](https://github.com/winghei/ng-select/compare/v5.2.2...v5.2.3) (2020-12-10)
+
+
+### Bug Fixes
+
+* **ngmodel:** returned empty string on null label values ([a67c829](https://github.com/winghei/ng-select/commit/a67c829a8cf51f2e699dfb9e74ff08af4ee72243))
+
 ### [5.2.2](https://github.com/winghei/ng-select/compare/v5.2.1...v5.2.2) (2020-11-02)
 
 
