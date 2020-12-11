@@ -62,6 +62,8 @@ export class NgSelectExtComponent extends NgSelectComponent {
   @Input() fastSelection = true;
   // integrated cancel/ok buttons as footer. Only trigger model update if 'OK' is clicked or clicked outside
   @Input() displayActionButtons = true;
+  // change layout to mobile
+  @Input() isMobile = false;
   // data change event will only emit if selection changed.
   @Input() emitDataChange = true;
   @Input() hideDisabled = true;
@@ -73,6 +75,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
   selected_all = false;
   commit_changes = true;
   initial_state: any;
+
 
   itemsList: ItemsListExt;
   __console: ConsoleService;
@@ -136,6 +139,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
   open() {
     super.open();
+
     if (this.disabled) {
       return;
     }
