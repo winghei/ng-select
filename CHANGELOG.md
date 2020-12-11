@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/winghei/ng-select/compare/v5.2.3...v5.3.0) (2020-12-11)
+
+
+### Features
+
+* **ng-select-ext:** added mobile switch to support mobile view of panel list ([d84a4ab](https://github.com/winghei/ng-select/commit/d84a4ab00d2986acad4434cdecc358947bdbcc98))
+
 ### [5.2.3](https://github.com/winghei/ng-select/compare/v5.2.2...v5.2.3) (2020-12-10)
 
 
