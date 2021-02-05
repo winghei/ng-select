@@ -177,7 +177,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
   focusInline() {
     if (this.inlineSearchInput) {
-      this.inlineSearchInput.nativeElement.focus();
+      setTimeout(() => this.inlineSearchInput.nativeElement.focus(),100);
     } else {
       setTimeout(() => this.focus(), 100);
     }
