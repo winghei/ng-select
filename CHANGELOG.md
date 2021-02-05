@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.3.1](https://github.com/winghei/ng-select/compare/v5.3.0...v5.3.1) (2021-02-05)
+
+
+### Bug Fixes
+
+* **search-input:** fix issue on mobile keyboard focus ([c55544e](https://github.com/winghei/ng-select/commit/c55544e2dc85e860c984ab9f4af2d0b8bce4995c))
+
 ## [5.3.0](https://github.com/winghei/ng-select/compare/v5.2.3...v5.3.0) (2020-12-11)
 
 
