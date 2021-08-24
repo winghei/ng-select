@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.4.0](https://github.com/winghei/ng-select/compare/v5.3.1...v5.4.0) (2021-08-24)
+
+
+### Features
+
+* **ng-options:** added escapeHTML as component input ([848e849](https://github.com/winghei/ng-select/commit/848e849791e4363e405ed155e3c95107411869d3))
+
 ### [5.3.1](https://github.com/winghei/ng-select/compare/v5.3.0...v5.3.1) (2021-02-05)
 
 
