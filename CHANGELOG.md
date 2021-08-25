@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.1](https://github.com/winghei/ng-select/compare/v5.4.0...v5.4.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* **ngOption:** Added option to use title property as title attribute ([417551c](https://github.com/winghei/ng-select/commit/417551cfab18ea1197f241c219f24b4d1fbd4a5b))
+
 ## [5.4.0](https://github.com/winghei/ng-select/compare/v5.3.1...v5.4.0) (2021-08-24)
 
 
