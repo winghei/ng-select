@@ -143,7 +143,7 @@
         <span class="ng-option-checkbox" *ngIf="displaySelectAll">
           <input readonly type="checkbox" [checked]="item.selected" />
         </span>
-        <span class="ng-option-label" [title]="item.label" [ngItemLabel]="item.label || '&nbsp;'" [escape]="escapeHTML"></span>
+        <span class="ng-option-label" [title]="item.title || item.label" [ngItemLabel]="item.label || '&nbsp;'" [escape]="escapeHTML"></span>
       </ng-template>
 
       <ng-template
