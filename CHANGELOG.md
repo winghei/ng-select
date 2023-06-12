@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.4.2](https://github.com/winghei/ng-select/compare/v5.4.1...v5.4.2) (2023-06-12)
+
+
+### Bug Fixes
+
+* **dropdown-panel:** Fixed issue on focus for safari browser scrolling affecting yPosition of dropdown. ([9ca6f61](https://github.com/winghei/ng-select/commit/9ca6f61fa198021d34e6439804c0f13edea050a1))
+
 ### [5.4.1](https://github.com/winghei/ng-select/compare/v5.4.0...v5.4.1) (2021-08-25)
 
 
