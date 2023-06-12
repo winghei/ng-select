@@ -80,7 +80,6 @@ export class NgSelectExtComponent extends NgSelectComponent {
   itemsList: ItemsListExt;
   __console: ConsoleService;
 
-  @ViewChild('inlineSearchInput') inlineSearchInput: ElementRef<HTMLInputElement>;
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -144,19 +143,6 @@ export class NgSelectExtComponent extends NgSelectComponent {
       return;
     }
 
-    const input = this.inlineSearchInput.nativeElement;
-    const attributes = {
-      type: 'text',
-      autocorrect: 'off',
-      autocapitalize: 'off',
-      autocomplete: 'off',
-      ...this.inputAttrs,
-    };
-
-    for (const key of Object.keys(attributes)) {
-      input.setAttribute(key, attributes[key]);
-    }
-    this.focusInline();
 
     if (this.displayActionButtons) {
       this.commit_changes = false;
@@ -165,21 +151,13 @@ export class NgSelectExtComponent extends NgSelectComponent {
 
   close() {
     super.close();
-    this.focus();
+  
     if (this.displayActionButtons) {
       if (!this.commit_changes) {
         this._handleWriteValue(this.initial_state);
       } else {
         this._updateNgModel();
       }
-    }
-  }
-
-  focusInline() {
-    if (this.inlineSearchInput) {
-      setTimeout(() => this.inlineSearchInput.nativeElement.focus(),100);
-    } else {
-      setTimeout(() => this.focus(), 100);
     }
   }
 

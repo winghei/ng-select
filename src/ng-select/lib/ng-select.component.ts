@@ -227,8 +227,8 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
 
   protected readonly _destroy$ = new Subject<void>();
   protected readonly _keyPress$ = new Subject<string>();
-  protected _onChange = (_: any) => {};
-  private _onTouched = () => {};
+  protected _onChange = (_: any) => { };
+  private _onTouched = () => { };
 
   clearItem = (item: any) => {
     const option = this.selectedItems.find((x) => x.value === item);
@@ -427,7 +427,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
     }
   }
 
-  open() {
+  open(escapeFocus?) {
     if (this.disabled || this.isOpen || this.itemsList.maxItemsSelected || this._manualOpen) {
       return;
     }
@@ -435,10 +435,11 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
     if (!this._isTypeahead && !this.addTag && this.itemsList.noItemsToSelect) {
       return;
     }
+
     this.isOpen = true;
     this.itemsList.markSelectedOrDefault(this.markFirst);
     this.openEvent.emit();
-    if (!this.searchTerm) {
+    if (!this.searchTerm && !escapeFocus) {
       this.focus();
     }
     this.detectChanges();
@@ -498,7 +499,9 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
   }
 
   focus() {
-    this.searchInput.nativeElement.focus();
+    var scrollTop = window.document.body.scrollTop; // save position
+    this.searchInput.nativeElement.focus({ preventScroll: true });
+    window.document.body.scrollTop = scrollTop;
   }
 
   blur() {
@@ -526,7 +529,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
 
     const handleTag = (item) => (this._isTypeahead || !this.isOpen ? this.itemsList.mapItem(item, null) : this.itemsList.addItem(item));
     if (isPromise(tag)) {
-      tag.then((item) => this.select(handleTag(item))).catch(() => {});
+      tag.then((item) => this.select(handleTag(item))).catch(() => { });
     } else if (tag) {
       this.select(handleTag(tag));
     }
@@ -978,8 +981,8 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
     this.virtualScroll = isDefined(this.virtualScroll)
       ? this.virtualScroll
       : isDefined(config.disableVirtualScroll)
-      ? !config.disableVirtualScroll
-      : false;
+        ? !config.disableVirtualScroll
+        : false;
     this.openOnEnter = isDefined(this.openOnEnter) ? this.openOnEnter : config.openOnEnter;
     this.appendTo = this.appendTo || config.appendTo;
     this.bindValue = this.bindValue || config.bindValue;

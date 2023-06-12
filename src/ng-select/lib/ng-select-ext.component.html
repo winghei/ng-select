@@ -73,7 +73,7 @@
     <input
       style="width: 100%"
       #inlineSearchInput
-      [attr.id]="labelForId"
+        id="labelForId"
       [readOnly]="itemsList.maxItemsSelected"
       [disabled]="disabled"
       [value]="searchTerm ? searchTerm : ''"
@@ -104,7 +104,7 @@
 <ng-dropdown-panel
   *ngIf="isOpen"
   class="ng-dropdown-panel {{ isMobile ? 'ng-select-mobile' : '' }}"
-  
+  [context]="this"
   [virtualScroll]="virtualScroll"
   [bufferAmount]="bufferAmount"
   [appendTo]="appendTo"

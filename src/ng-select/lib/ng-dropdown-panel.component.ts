@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
+    AfterViewInit,
     ChangeDetectionStrategy,
     Component,
     ElementRef,
@@ -23,7 +24,7 @@ import { animationFrameScheduler, asapScheduler, fromEvent, merge, Subject } fro
 import { auditTime, takeUntil } from 'rxjs/operators';
 import { NgDropdownPanelService, PanelDimensions } from './ng-dropdown-panel.service';
 
-import { DropdownPosition } from './ng-select.component';
+import { DropdownPosition, NgSelectComponent } from './ng-select.component';
 import { NgOption } from './ng-select.types';
 import { isDefined } from './value-utils';
 
@@ -50,7 +51,7 @@ const SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? animatio
         </div>
     `
 })
-export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy {
+export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 
     @Input() items: NgOption[] = [];
     @Input() markedItem: NgOption;
@@ -61,6 +62,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy {
     @Input() headerTemplate: TemplateRef<any>;
     @Input() footerTemplate: TemplateRef<any>;
     @Input() filterValue: string = null;
+    @Input() context: NgSelectComponent;
 
     @Output() update = new EventEmitter<any[]>();
     @Output() scroll = new EventEmitter<{ start: number; end: number }>();
@@ -69,6 +71,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy {
 
     @ViewChild('content', { read: ElementRef, static: true }) contentElementRef: ElementRef;
     @ViewChild('scroll', { read: ElementRef, static: true }) scrollElementRef: ElementRef;
+    @ViewChild('inlineSearchInput') inlineSearchInput: ElementRef<HTMLInputElement>;
     @ViewChild('padding', { read: ElementRef, static: true }) paddingElementRef: ElementRef;
 
     private readonly _destroy$ = new Subject<void>();
@@ -139,6 +142,29 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy {
         this._appendDropdown();
     }
 
+    ngAfterViewInit(): void {
+        const searchInput = window.document.getElementById('labelForId')
+        if (searchInput) {
+            const input = searchInput;
+            const attributes = {
+                type: 'text',
+                autocorrect: 'off',
+                autocapitalize: 'off',
+                autocomplete: 'off',
+                ...this.context.inputAttrs,
+            };
+
+            for (const key of Object.keys(attributes)) {
+                input.setAttribute(key, attributes[key]);
+            }
+
+            setTimeout(() => searchInput.focus(), 100);
+        }
+
+    }
+
+
+
     ngOnChanges(changes: SimpleChanges) {
         if (changes.items) {
             const change = changes.items;
@@ -190,6 +216,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     private _handleDropdownPosition() {
+
         this._currentPosition = this._calculateCurrentPosition(this._dropdown);
         if (this._currentPosition === 'top') {
             this._renderer.addClass(this._dropdown, TOP_CSS_CLASS);
@@ -403,7 +430,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy {
         this._parent.appendChild(this._dropdown);
     }
 
-     _updateXPosition() {
+    _updateXPosition() {
         const select = this._select.getBoundingClientRect();
         const parent = this._parent.getBoundingClientRect();
         const offsetLeft = select.left - parent.left;
@@ -417,14 +444,14 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy {
         const select = this._select.getBoundingClientRect();
         const parent = this._parent.getBoundingClientRect();
         const delta = select.height;
-
+     
         if (this._currentPosition === 'top') {
             const offsetBottom = parent.bottom - select.bottom;
-            this._dropdown.style.bottom = offsetBottom + delta + 'px';
+            this._dropdown.style.bottom = offsetBottom + delta - 1 + 'px';
             this._dropdown.style.top = 'auto';
         } else if (this._currentPosition === 'bottom') {
             const offsetTop = select.top - parent.top;
-            this._dropdown.style.top = offsetTop + delta + 'px';
+            this._dropdown.style.top = offsetTop + delta - 1 + 'px';
             this._dropdown.style.bottom = 'auto';
         }
     }
