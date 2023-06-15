@@ -158,7 +158,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
                 input.setAttribute(key, attributes[key]);
             }
 
-            setTimeout(() => searchInput.focus(), 100);
+            setTimeout(() => searchInput.focus({preventScroll:true}), 100);
         }
 
     }
