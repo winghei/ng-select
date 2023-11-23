@@ -31,18 +31,6 @@
               "src/ng-select/lib/ng-templates.directive.ts"
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/ng-select/tsconfig.lib.json",
-              "src/ng-select/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
         }
       }
     },
@@ -85,7 +73,6 @@
             "polyfills": "src/demo/polyfills.ts",
             "tsConfig": "src/demo/tsconfig.app.json",
             "deployUrl": "/ng-select/",
-            "extractCss": true,
             "assets": [
               "src/demo/favicon.ico",
               "src/demo/assets"
@@ -112,7 +99,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -135,8 +121,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo:build",
-            "deployUrl": "/"
+            "browserTarget": "demo:build"
           },
           "configurations": {
             "production": {
@@ -170,18 +155,6 @@
             "main": "src/ng-option-highlight/test.ts",
             "tsConfig": "src/ng-option-highlight/tsconfig.spec.json",
             "karmaConfig": "src/ng-option-highlight/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/ng-option-highlight/tsconfig.lib.json",
-              "src/ng-option-highlight/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
