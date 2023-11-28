@@ -1,5 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
+  },
   "version": 1,
   "newProjectRoot": "src",
   "projects": {
@@ -31,6 +37,15 @@
               "src/ng-select/lib/ng-templates.directive.ts"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/ng-select/**/*.ts",
+              "src/ng-select/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -51,6 +66,7 @@
           "skipTests": true
         },
         "@schematics/angular:module": {
+          "skipTests": true
         },
         "@schematics/angular:pipe": {
           "skipTests": true
@@ -114,8 +130,7 @@
                 }
               ]
             }
-          },
-          "defaultConfiguration": ""
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -141,11 +156,6 @@
           "options": {
             "tsConfig": "src/ng-option-highlight/tsconfig.lib.json",
             "project": "src/ng-option-highlight/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "src/ng-option-highlight/tsconfig.lib.prod.json"
-            }
           }
         },
         "test": {
@@ -153,13 +163,20 @@
           "options": {
             "main": "src/ng-option-highlight/test.ts",
             "tsConfig": "src/ng-option-highlight/tsconfig.spec.json",
-            "karmaConfig": "src/ng-option-highlight/karma.conf.js"
+            "karmaConfig": "src/ng-option-highlight/karma.conf.js",
+            "watch": false
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/ng-option-highlight/**/*.ts",
+              "src/ng-option-highlight/**/*.html"
+            ]
           }
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "130cfc4f-21b2-410e-a026-9fb503e1b107"
   }
 }

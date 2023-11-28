@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import sdk from '@stackblitz/sdk';
-import { Project } from '@stackblitz/sdk/typings/interfaces';
 
 const EXAMPLE_PATH = '/ng-select/examples/';
 const TEMPLATE_PATH = '/ng-select/assets/stackblitz/';
@@ -56,7 +55,7 @@ export class StackblitzService {
         const exampleFiles = await this.fetchExampleFiles();
         const templateFiles = await this.fetchTemplateFiles();
 
-        const project: Project = {
+        const project: any = {
             files: {
                 ...templateFiles,
                 ...exampleFiles

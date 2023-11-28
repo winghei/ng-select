@@ -43,11 +43,7 @@ import { isDefined, isObject } from './value-utils';
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    role: 'listbox',
-    '[class.ng-select]': 'useDefaultClass',
-    '[class.ng-select-single]': '!multiple',
-  },
+
 })
 export class NgSelectExtComponent extends NgSelectComponent {
   // integrated select all header. Will be replaced if header template is used. Only available if fastSelection is enabled

@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
@@ -20,6 +20,7 @@ import {
     ViewChild,
     ViewEncapsulation
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { animationFrameScheduler, asapScheduler, fromEvent, merge, Subject } from 'rxjs';
 import { auditTime, takeUntil } from 'rxjs/operators';
 import { NgDropdownPanelService, PanelDimensions } from './ng-dropdown-panel.service';
@@ -36,6 +37,8 @@ const SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? animatio
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     selector: 'ng-dropdown-panel',
+ 
+   
     template: `
         <div *ngIf="headerTemplate" class="ng-dropdown-header">
             <ng-container [ngTemplateOutlet]="headerTemplate" [ngTemplateOutletContext]="{ searchTerm: filterValue }"></ng-container>
@@ -158,7 +161,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
                 input.setAttribute(key, attributes[key]);
             }
 
-            setTimeout(() => searchInput.focus({preventScroll:true}), 100);
+            setTimeout(() => searchInput.focus({ preventScroll: true }), 100);
         }
 
     }
@@ -444,7 +447,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
         const select = this._select.getBoundingClientRect();
         const parent = this._parent.getBoundingClientRect();
         const delta = select.height;
-     
+
         if (this._currentPosition === 'top') {
             const offsetBottom = parent.bottom - select.bottom;
             this._dropdown.style.bottom = offsetBottom + delta - 1 + 'px';
