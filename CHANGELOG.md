@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.5.1](https://github.com/winghei/ng-select/compare/v5.5.0...v5.5.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* **package:** Change compilation mode to partial to allow npm publishing ([848eb0e](https://github.com/winghei/ng-select/commit/848eb0e446ce0bc895db109e028fcf2e14fe81c2))
+
 ## [5.5.0](https://github.com/winghei/ng-select/compare/v5.4.3...v5.5.0) (2023-11-29)
 
 
