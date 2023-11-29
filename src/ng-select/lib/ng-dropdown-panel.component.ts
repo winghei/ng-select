@@ -25,7 +25,7 @@ import { animationFrameScheduler, asapScheduler, fromEvent, merge, Subject } fro
 import { auditTime, takeUntil, throttle } from 'rxjs/operators';
 import { NgDropdownPanelService, PanelDimensions } from './ng-dropdown-panel.service';
 
-import { DropdownPosition, NgSelectComponent } from './ng-select.component';
+
 import { NgOption } from './ng-select.types';
 import { isDefined } from './value-utils';
 
@@ -37,8 +37,6 @@ const SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? animatio
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     selector: 'ng-dropdown-panel',
-
-
     template: `
         <div *ngIf="headerTemplate" class="ng-dropdown-header">
             <ng-container [ngTemplateOutlet]="headerTemplate" [ngTemplateOutletContext]="{context, searchTerm: filterValue }"></ng-container>
@@ -58,14 +56,14 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
 
     @Input() items: NgOption[] = [];
     @Input() markedItem: NgOption;
-    @Input() position: DropdownPosition = 'auto';
+    @Input() position: string = 'auto';
     @Input() appendTo: string;
     @Input() bufferAmount;
     @Input() virtualScroll = false;
     @Input() headerTemplate: TemplateRef<any>;
     @Input() footerTemplate: TemplateRef<any>;
     @Input() filterValue: string = null;
-    @Input() context: NgSelectComponent;
+    @Input() context: any;
 
     @Output() update = new EventEmitter<any[]>();
     @Output() scroll = new EventEmitter<{ start: number; end: number }>();
@@ -98,9 +96,9 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
         this._dropdown = _elementRef.nativeElement;
     }
 
-    private _currentPosition: DropdownPosition;
+    private _currentPosition: string;
 
-    get currentPosition(): DropdownPosition {
+    get currentPosition(): string {
         return this._currentPosition;
     }
 

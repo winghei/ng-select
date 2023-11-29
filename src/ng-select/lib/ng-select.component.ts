@@ -257,7 +257,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
     return this.selectedItems.length > 0;
   }
 
-  get currentPanelPosition(): DropdownPosition {
+  get currentPanelPosition(): any {
     if (this.dropdownPanel) {
       return this.dropdownPanel.currentPosition;
     }
