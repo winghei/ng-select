@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.6.0](https://github.com/winghei/ng-select/compare/v5.5.1...v5.6.0) (2023-11-29)
+
+
+### Features
+
+* **ng-select:** Pass context argument on dropdown panel footer to extend customisation ([0d42438](https://github.com/winghei/ng-select/commit/0d42438d9a92097d540ceb44b2874ac8bf09e71f))
+
 ### [5.5.1](https://github.com/winghei/ng-select/compare/v5.5.0...v5.5.1) (2023-11-29)
 
 
