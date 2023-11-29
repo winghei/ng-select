@@ -43,6 +43,7 @@ import { GroupSelectableExampleComponent } from './group-selectable-example/grou
 import { GroupSelectableHiddenExampleComponent } from './group-selectable-hidden-example/group-selectable-hidden-example.component';
 import { GroupChildrenExampleComponent } from './group-children-example/group-children-example.component';
 import { SearchEditableExampleComponent } from './search-editable-example/search-editable-example.component';
+import { NgSelectExtendedExampleCustomPanelHeaderComponent } from './ng-select-extended-example-custom-panel-header/ng-select-extended-example-custom-panel-header.component';
 
 
 export interface Example {
@@ -225,6 +226,10 @@ export const EXAMPLE_COMPONENTS: { [key: string]: Example } = {
     },
     'extended-example': {
         component:NgSelectExtendedExampleComponent,
+        title: 'Extended NgSelect'
+    },
+    'extended-example-custom-panel-header': {
+        component:NgSelectExtendedExampleCustomPanelHeaderComponent,
         title: 'Extended NgSelect'
     },
     'extended-example-single': {

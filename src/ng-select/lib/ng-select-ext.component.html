@@ -1,54 +1,55 @@
-<div
-  (mousedown)="handleMousedown($event)"
-  [class.ng-appearance-outline]="appearance === 'outline'"
-  [class.ng-has-value]="hasValue"
-  class="ng-select-container"
->
+<div (mousedown)="handleMousedown($event)"
+     [class.ng-appearance-outline]="appearance === 'outline'"
+     [class.ng-has-value]="hasValue"
+     class="ng-select-container">
   <div class="ng-value-container">
     <div class="ng-placeholder">{{ placeholder }}</div>
 
-    <ng-container *ngIf="!multiLabelTemplate && selectedItems.length > 0 && (displayLimit >= selectedItems.length || !multiple)">
-      <div [class.ng-value-disabled]="item.disabled" class="ng-value" *ngFor="let item of selectedItems; trackBy: trackByOption">
+    <ng-container
+                  *ngIf="!multiLabelTemplate && selectedItems.length > 0 && (displayLimit >= selectedItems.length || !multiple)">
+      <div [class.ng-value-disabled]="item.disabled"
+           class="ng-value"
+           *ngFor="let item of selectedItems; trackBy: trackByOption">
         <ng-template #defaultLabelTemplate>
-          <span class="ng-value-icon left" (click)="unselect(item)" aria-hidden="true">×</span>
-          <span class="ng-value-label" [title]="item.label" [ngItemLabel]="item.label" [escape]="escapeHTML"></span>
+          <span class="ng-value-icon left"
+                (click)="unselect(item)"
+                aria-hidden="true">×</span>
+          <span class="ng-value-label"
+                [title]="item.label"
+                [ngItemLabel]="item.label"
+                [escape]="escapeHTML"></span>
         </ng-template>
-        <ng-template
-          [ngTemplateOutlet]="labelTemplate || defaultLabelTemplate"
-          [ngTemplateOutletContext]="{ item: item.value, clear: clearItem, label: item.label }"
-        >
+        <ng-template [ngTemplateOutlet]="labelTemplate || defaultLabelTemplate"
+                     [ngTemplateOutletContext]="{ item: item.value, clear: clearItem, label: item.label }">
         </ng-template>
       </div>
     </ng-container>
-    <ng-container *ngIf="!multiLabelTemplate && selectedItems.length > 0 && displayLimit < selectedItems.length && multiple">
+    <ng-container
+                  *ngIf="!multiLabelTemplate && selectedItems.length > 0 && displayLimit < selectedItems.length && multiple">
       <span class="ng-value-label">{{ selectedItems.length }} / {{ itemsList.items.length }} selected</span>
     </ng-container>
-    <ng-template
-      *ngIf="multiLabelTemplate && selectedValues.length > 0"
-      [ngTemplateOutlet]="multiLabelTemplate"
-      [ngTemplateOutletContext]="{ items: selectedValues, clear: clearItem }"
-    >
+    <ng-template *ngIf="multiLabelTemplate && selectedValues.length > 0"
+                 [ngTemplateOutlet]="multiLabelTemplate"
+                 [ngTemplateOutletContext]="{ items: selectedValues, clear: clearItem }">
     </ng-template>
 
     <div class="ng-input">
-      <input
-        #searchInput
-        [attr.id]="labelForId"
-        [attr.tabindex]="tabIndex"
-        [readOnly]="!searchable || itemsList.maxItemsSelected"
-        [disabled]="disabled"
-        [value]="searchTerm ? searchTerm : ''"
-        (input)="filter(searchInput.value)"
-        (compositionstart)="onCompositionStart()"
-        (compositionend)="onCompositionEnd(searchInput.value)"
-        (focus)="onInputFocus($event)"
-        (blur)="onInputBlur($event)"
-        (change)="$event.stopPropagation()"
-        role="combobox"
-        [attr.aria-expanded]="isOpen"
-        [attr.aria-owns]="isOpen ? dropdownId : null"
-        [attr.aria-activedescendant]="isOpen ? itemsList?.markedItem?.htmlId : null"
-      />
+      <input #searchInput
+             [attr.id]="labelForId"
+             [attr.tabindex]="tabIndex"
+             [readOnly]="!searchable || itemsList.maxItemsSelected"
+             [disabled]="disabled"
+             [value]="searchTerm ? searchTerm : ''"
+             (input)="filter(searchInput.value)"
+             (compositionstart)="onCompositionStart()"
+             (compositionend)="onCompositionEnd(searchInput.value)"
+             (focus)="onInputFocus($event)"
+             (blur)="onInputBlur($event)"
+             (change)="$event.stopPropagation()"
+             role="combobox"
+             [attr.aria-expanded]="isOpen"
+             [attr.aria-owns]="isOpen ? dropdownId : null"
+             [attr.aria-activedescendant]="isOpen ? itemsList?.markedItem?.htmlId : null" />
     </div>
   </div>
 
@@ -59,38 +60,48 @@
     <ng-template [ngTemplateOutlet]="loadingSpinnerTemplate || defaultLoadingSpinnerTemplate"></ng-template>
   </ng-container>
 
-  <span *ngIf="showClear()" class="ng-clear-wrapper" title="{{ clearAllText }}"> <span class="ng-clear" aria-hidden="true">×</span></span>
+  <span *ngIf="showClear()"
+        class="ng-clear-wrapper"
+        title="{{ clearAllText }}"> <span class="ng-clear"
+          aria-hidden="true">×</span></span>
 
   <span class="ng-arrow-wrapper"> <span class="ng-arrow"></span></span>
 </div>
 
-<ng-template #headerTemplate>
-  <div *ngIf="isMobile" class="mobile-header">
-    <div class="placeholder">{{ placeholder }}</div>
-    <span class="ng-value-icon" (click)="close()" aria-hidden="true">×</span>
+<ng-template #defaultHeaderTemplate
+             let-context="context">
+  <div *ngIf="context.isMobile"
+       class="mobile-header">
+    <div class="placeholder">{{ context.placeholder }}</div>
+    <span class="ng-value-icon"
+          (click)="context.close()"
+          aria-hidden="true">×</span>
   </div>
-  <div class="ng-input">
-    <input
-      style="width: 100%"
-      #inlineSearchInput
-        id="labelForId"
-      [readOnly]="itemsList.maxItemsSelected"
-      [disabled]="disabled"
-      [value]="searchTerm ? searchTerm : ''"
-      (input)="filter(inlineSearchInput.value)"
-      (compositionstart)="onCompositionStart()"
-      (compositionend)="onCompositionEnd(inlineSearchInput.value)"
-      (change)="$event.stopPropagation()"
-      (blur)="focus()"
-      role="combobox"
-      [attr.aria-expanded]="isOpen"
-      [attr.aria-owns]="isOpen ? dropdownId : null"
-      [attr.aria-activedescendant]="isOpen ? itemsList?.markedItem?.htmlId : null"
-    />
+  <div class="ng-input ng-search-input">
+    <input style="width: 100%"
+           #inlineSearchInput
+           id="labelForId"
+           [readOnly]="context.itemsList.maxItemsSelected"
+           [disabled]="context.disabled"
+           [value]="context.searchTerm ? context.searchTerm : ''"
+           (input)="context.filter(inlineSearchInput.value)"
+           (compositionstart)="context.onCompositionStart()"
+           [placeholder]="context.searchPlaceholder"
+           (compositionend)="context.onCompositionEnd(inlineSearchInput.value)"
+           (change)="$event.stopPropagation()"
+           (blur)="context.focus()"
+           role="combobox"
+           [attr.aria-expanded]="context.isOpen"
+           [attr.aria-owns]="context.isOpen ? context.dropdownId : null"
+           [attr.aria-activedescendant]="context.isOpen ? context.itemsList?.markedItem?.htmlId : null" />
   </div>
-  <div class="select-all" *ngIf="displaySelectAll && viewPortItems.length">
-    <input id="selectAll" type="checkbox" [checked]="selected_all" (change)="selectAll($event)" />
-    <label for="selectAll"> Select All {{ searchTerm ? 'Search Results' : '' }} </label>
+  <div class="select-all"
+       *ngIf="context.displaySelectAll && context.viewPortItems.length">
+    <input id="selectAll"
+           type="checkbox"
+           [checked]="context.selected_all"
+           (change)="context.selectAll($event)" />
+    <label for="selectAll"> Select all {{ context.searchTerm ? 'search results' : '' }} </label>
   </div>
 </ng-template>
 
@@ -101,79 +112,76 @@
   </div>
 </ng-template>
 
-<ng-dropdown-panel
-  *ngIf="isOpen"
-  class="ng-dropdown-panel {{ isMobile ? 'ng-select-mobile' : '' }}"
-  [context]="this"
-  [virtualScroll]="virtualScroll"
-  [bufferAmount]="bufferAmount"
-  [appendTo]="appendTo"
-  [position]="dropdownPosition"
-  [headerTemplate]="headerTemplate"
-  [footerTemplate]="displayActionButtons ? actionButtonsTemplate : footerTemplate"
-  [filterValue]="searchTerm"
-  [items]="itemsList.filteredItems"
-  [markedItem]="itemsList.markedItem"
-  (update)="viewPortItems = $event"
-  (scroll)="scroll.emit($event)"
-  (keydown)="handleKeyDown($event)"
-  (scrollToEnd)="scrollToEnd.emit($event)"
-  (outsideClick)="commit_changes = true; close()"
-  [class.ng-select-multiple]="multiple"
-  [ngClass]="appendTo ? classes : null"
-  [id]="dropdownId"
->
+<ng-dropdown-panel *ngIf="isOpen"
+                   class="ng-dropdown-panel {{ isMobile ? 'ng-select-mobile' : '' }}"
+                   [context]="this"
+                   [virtualScroll]="virtualScroll"
+                   [bufferAmount]="bufferAmount"
+                   [appendTo]="appendTo"
+                   [position]="dropdownPosition"
+                   [headerTemplate]="headerTemplate || defaultHeaderTemplate"
+                   [footerTemplate]="displayActionButtons ? actionButtonsTemplate : footerTemplate"
+                   [filterValue]="searchTerm"
+                   [items]="itemsList.filteredItems"
+                   [markedItem]="itemsList.markedItem"
+                   (update)="viewPortItems = $event"
+                   (scroll)="scroll.emit($event)"
+                   (keydown)="handleKeyDown($event)"
+                   (scrollToEnd)="scrollToEnd.emit($event)"
+                   (outsideClick)="commit_changes = true; close()"
+                   [class.ng-select-multiple]="multiple"
+                   [ngClass]="appendTo ? classes : null"
+                   [id]="dropdownId">
   <ng-container>
-    <div
-      class="ng-option"
-      [attr.role]="item.children ? 'group' : 'option'"
-      (click)="toggleItem(item)"
-      (mouseover)="onItemHover(item)"
-      *ngFor="let item of viewPortItems; trackBy: trackByOption"
-      [class.ng-option-disabled]="item.disabled"
-      [class.ng-option-selected]="item.selected"
-      [class.ng-optgroup]="item.children"
-      [class.ng-option]="!item.children"
-      [class.ng-option-child]="!!item.parent"
-      [class.ng-option-marked]="item === itemsList.markedItem"
-      [attr.aria-selected]="item.selected"
-      [attr.id]="item?.htmlId"
-    >
+    <div class="ng-option"
+         [attr.role]="item.children ? 'group' : 'option'"
+         (click)="toggleItem(item)"
+         (mouseover)="onItemHover(item)"
+         *ngFor="let item of viewPortItems; trackBy: trackByOption"
+         [class.ng-option-disabled]="item.disabled"
+         [class.ng-option-selected]="item.selected"
+         [class.ng-optgroup]="item.children"
+         [class.ng-option]="!item.children"
+         [class.ng-option-child]="!!item.parent"
+         [class.ng-option-marked]="item === itemsList.markedItem"
+         [attr.aria-selected]="item.selected"
+         [attr.id]="item?.htmlId">
       <ng-template #defaultOptionTemplate>
-        <span class="ng-option-checkbox" *ngIf="displaySelectAll">
-          <input readonly type="checkbox" [checked]="item.selected" />
+        <span class="ng-option-checkbox"
+              *ngIf="displaySelectAll">
+          <input readonly
+                 type="checkbox"
+                 [checked]="item.selected" />
         </span>
-        <span class="ng-option-label" [title]="item.title || item.label" [ngItemLabel]="item.label || '&nbsp;'" [escape]="escapeHTML"></span>
+        <span class="ng-option-label"
+              [title]="item.title || item.label"
+              [ngItemLabel]="item.label || '&nbsp;'"
+              [escape]="escapeHTML"></span>
       </ng-template>
 
-      <ng-template
-        [ngTemplateOutlet]="item.children ? optgroupTemplate || defaultOptionTemplate : optionTemplate || defaultOptionTemplate"
-        [ngTemplateOutletContext]="{
+      <ng-template [ngTemplateOutlet]="item.children ? optgroupTemplate || defaultOptionTemplate : optionTemplate || defaultOptionTemplate"
+                   [ngTemplateOutletContext]="{
           item: item.value,
           item$: item,
           index: item.index,
           searchTerm: searchTerm
-        }"
-      >
+        }">
       </ng-template>
     </div>
 
-    <div
-      class="ng-option"
-      [class.ng-option-marked]="!itemsList.markedItem"
-      (mouseover)="itemsList.unmarkItem()"
-      role="option"
-      (click)="selectTag()"
-      *ngIf="showAddTag"
-    >
+    <div class="ng-option"
+         [class.ng-option-marked]="!itemsList.markedItem"
+         (mouseover)="itemsList.unmarkItem()"
+         role="option"
+         (click)="selectTag()"
+         *ngIf="showAddTag">
       <ng-template #defaultTagTemplate>
         <span>
-          <span class="ng-tag-label">{{ addTagText }}</span
-          >"{{ searchTerm }}"</span
-        >
+          <span class="ng-tag-label">{{ addTagText }}</span>"{{ searchTerm }}"</span>
       </ng-template>
 
-      <ng-template [ngTemplateOutlet]="tagTemplate || defaultTagTemplate" [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
+      <ng-template [ngTemplateOutlet]="tagTemplate || defaultTagTemplate"
+                   [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
       </ng-template>
     </div>
   </ng-container>
@@ -182,7 +190,8 @@
     <ng-template #defaultNotFoundTemplate>
       <div class="ng-option ng-option-disabled">{{ notFoundText }}</div>
     </ng-template>
-    <ng-template [ngTemplateOutlet]="notFoundTemplate || defaultNotFoundTemplate" [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
+    <ng-template [ngTemplateOutlet]="notFoundTemplate || defaultNotFoundTemplate"
+                 [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
     </ng-template>
   </ng-container>
 
@@ -197,10 +206,8 @@
     <ng-template #defaultLoadingTextTemplate>
       <div class="ng-option ng-option-disabled">{{ loadingText }}</div>
     </ng-template>
-    <ng-template
-      [ngTemplateOutlet]="loadingTextTemplate || defaultLoadingTextTemplate"
-      [ngTemplateOutletContext]="{ searchTerm: searchTerm }"
-    >
+    <ng-template [ngTemplateOutlet]="loadingTextTemplate || defaultLoadingTextTemplate"
+                 [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
     </ng-template>
   </ng-container>
 </ng-dropdown-panel>

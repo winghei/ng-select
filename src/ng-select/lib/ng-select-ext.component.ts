@@ -59,6 +59,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
   // integrated cancel/ok buttons as footer. Only trigger model update if 'OK' is clicked or clicked outside
   @Input() displayActionButtons = true;
   // change layout to mobile
+  @Input() searchPlaceholder = ''
   @Input() isMobile = false;
   // data change event will only emit if selection changed.
   @Input() emitDataChange = true;

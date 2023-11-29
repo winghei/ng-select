@@ -22,7 +22,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { animationFrameScheduler, asapScheduler, fromEvent, merge, Subject } from 'rxjs';
-import { auditTime, takeUntil } from 'rxjs/operators';
+import { auditTime, takeUntil, throttle } from 'rxjs/operators';
 import { NgDropdownPanelService, PanelDimensions } from './ng-dropdown-panel.service';
 
 import { DropdownPosition, NgSelectComponent } from './ng-select.component';
@@ -37,11 +37,11 @@ const SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? animatio
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
     selector: 'ng-dropdown-panel',
- 
-   
+
+
     template: `
         <div *ngIf="headerTemplate" class="ng-dropdown-header">
-            <ng-container [ngTemplateOutlet]="headerTemplate" [ngTemplateOutletContext]="{ searchTerm: filterValue }"></ng-container>
+            <ng-container [ngTemplateOutlet]="headerTemplate" [ngTemplateOutletContext]="{context, searchTerm: filterValue }"></ng-container>
         </div>
         <div #scroll class="ng-dropdown-panel-items scroll-host">
             <div #padding [class.total-padding]="virtualScroll"></div>
@@ -126,6 +126,8 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
         return 0;
     }
 
+
+
     @HostListener('mousedown', ['$event'])
     handleMousedown($event: MouseEvent) {
         const target = $event.target as HTMLElement;
@@ -135,7 +137,41 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
         $event.preventDefault();
     }
 
+    @HostListener('window:resize', ['event'])
+    windowResize($event: any) {
+        this.scrollEvent($event);
+    }
+
+
+    scrollDebounce: any;
+    time = Date.now();
+    scrollEvent = ($event) => {
+        this.throttle(() => {
+            this.resetScrollHeight(this._panelService.dimensions.itemHeight);
+            if (this.scrollElementRef && this.isSelectVisible())
+                this.adjustPosition();
+            else
+                this.context.close()
+        }, this.time, 1)()
+    }
+
+    // Set up the throttler 
+    throttle = (fn, time, delay) => {
+        // Capture the current time 
+        // Here's our logic 
+        return () => {
+            if ((time + delay - Date.now()) <= 0) {
+                // Run the function we've passed to our throttler, 
+                // and reset the `time` variable (so we can check again). 
+                fn();
+                this.time = Date.now();
+            }
+        }
+    }
+
     ngOnInit() {
+        if (this.context.appendTo == 'body')
+            window.addEventListener('scroll', this.scrollEvent, true); //third parameter
         this._select = this._dropdown.parentElement;
         this._virtualPadding = this.paddingElementRef.nativeElement;
         this._scrollablePanel = this.scrollElementRef.nativeElement;
@@ -176,6 +212,8 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
     }
 
     ngOnDestroy() {
+        if (this.context.appendTo == 'body')
+            window.removeEventListener('scroll', this.scrollEvent, true);
         this._destroy$.next();
         this._destroy$.complete();
         this._destroy$.unsubscribe();
@@ -301,6 +339,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
         this._zone.runOutsideAngular(() => {
             Promise.resolve().then(() => {
                 const panelHeight = this._scrollablePanel.clientHeight;
+
                 this._panelService.setDimensions(0, panelHeight);
                 this._handleDropdownPosition();
                 this.scrollTo(this.markedItem, firstChange);
@@ -311,6 +350,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
     private _updateItemsRange(firstChange: boolean) {
         this._zone.runOutsideAngular(() => {
             this._measureDimensions().then(() => {
+
                 if (firstChange) {
                     this._renderItemsRange(this._startOffset);
                     this._handleDropdownPosition();
@@ -319,6 +359,39 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
                 }
             });
         });
+    }
+
+
+
+
+    isSelectVisible(): boolean {
+        let el: any = this._select;
+        // get list of parent nodes
+        let parents = [];
+        for (parents = []; el; el = el.parentNode) {
+            if (el == document)
+                parents.push(null)
+            else if (el.scrollHeight > el.clientHeight)
+                parents.push(el);
+        }
+        // exclude the parent container
+       
+        let is_hidden = false;
+        parents.find(el => {
+            is_hidden = !this.isElementVisible(this._select, el)
+            return is_hidden
+        })
+        return !is_hidden
+    }
+
+    isElementVisible(el, holder): boolean {
+        holder = holder || document.body
+        const { top, bottom, height } = el.getBoundingClientRect()
+        const holderRect = holder.getBoundingClientRect()
+
+        return top <= holderRect.top
+            ? holderRect.top - top <= 0
+            : bottom - holderRect.bottom <= 0
     }
 
     private _onContentScrolled(scrollTop: number) {
@@ -370,20 +443,43 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
         }
     }
 
-    private _measureDimensions(): Promise<PanelDimensions> {
-        if (this._panelService.dimensions.itemHeight > 0 || this.itemsLength === 0) {
-            return Promise.resolve(this._panelService.dimensions);
+    private resetScrollHeight(optionHeight: number): void {
+        this._scrollablePanel.style.maxHeight = '100vh'
+        this._virtualPadding.style.height = `${optionHeight * this.itemsLength}px`
+        let panelHeight = this._scrollablePanel.clientHeight;
+        const control_height = this._dropdown.clientHeight - panelHeight;
+        const parentBound = this._select.getBoundingClientRect();
+        const documentBound = document.body.getBoundingClientRect();
+        const bottom_space = documentBound.height - parentBound.bottom - control_height - 10;
+        const top_space = parentBound.top - control_height - 10
+        if (panelHeight > bottom_space && top_space < documentBound.height / 2) {
+            this._scrollablePanel.style.maxHeight = bottom_space + 'px';
+            panelHeight = this._scrollablePanel.clientHeight;
+        } else if (panelHeight < (bottom_space)) {
+
+        } else if (panelHeight > top_space && bottom_space < top_space) {
+            this._scrollablePanel.style.maxHeight = top_space + 'px';
+            panelHeight = this._scrollablePanel.clientHeight;
         }
 
+        this._panelService.setDimensions(optionHeight, panelHeight);
+    }
+
+    private _measureDimensions(): Promise<PanelDimensions> {
+        if (this._panelService.dimensions.itemHeight > 0 || this.itemsLength === 0) {
+            return Promise.resolve().then(() => {
+                this.resetScrollHeight(this._panelService.dimensions.itemHeight);
+                return this._panelService.dimensions
+            });
+        }
         const [first] = this.items;
         this.update.emit([first]);
 
         return Promise.resolve().then(() => {
-            const option = this._dropdown.querySelector(`#${first.htmlId}`);
+            const option = this._dropdown.querySelector(`#${this.items[0].htmlId}`);
             const optionHeight = option.clientHeight;
-            this._virtualPadding.style.height = `${optionHeight * this.itemsLength}px`;
-            const panelHeight = this._scrollablePanel.clientHeight;
-            this._panelService.setDimensions(optionHeight, panelHeight);
+
+            this.resetScrollHeight(optionHeight);
 
             return this._panelService.dimensions;
         });
@@ -405,6 +501,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
     }
 
     private _calculateCurrentPosition(dropdownEl: HTMLElement) {
+
         if (this.position !== 'auto') {
             return this.position;
         }
