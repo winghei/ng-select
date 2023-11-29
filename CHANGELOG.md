@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.2](https://github.com/winghei/ng-select/compare/v5.6.1...v5.6.2) (2023-11-29)
+
+
+### Bug Fixes
+
+* **ng-select:** Disable scroll event on dropdown panel scroll ([f0ccecf](https://github.com/winghei/ng-select/commit/f0ccecf2d6be1909fe7304fa9fd6dd1692170ae4))
+
 ### [5.6.1](https://github.com/winghei/ng-select/compare/v5.6.0...v5.6.1) (2023-11-29)
 
 
