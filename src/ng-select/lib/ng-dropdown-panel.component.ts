@@ -48,7 +48,7 @@ const SCROLL_SCHEDULER = typeof requestAnimationFrame !== 'undefined' ? animatio
             </div>
         </div>
         <div *ngIf="footerTemplate" class="ng-dropdown-footer">
-            <ng-container [ngTemplateOutlet]="footerTemplate" [ngTemplateOutletContext]="{ searchTerm: filterValue }"></ng-container>
+            <ng-container [ngTemplateOutlet]="footerTemplate" [ngTemplateOutletContext]="{context, searchTerm: filterValue }"></ng-container>
         </div>
     `
 })
