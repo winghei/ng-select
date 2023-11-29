@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.1](https://github.com/winghei/ng-select/compare/v5.6.0...v5.6.1) (2023-11-29)
+
+
+### Bug Fixes
+
+* **ng-select:** Fixed footer not using template on multiple set ([f4506f3](https://github.com/winghei/ng-select/commit/f4506f3197d166a3f775cae61206cd88d6b31ebd))
+
 ## [5.6.0](https://github.com/winghei/ng-select/compare/v5.5.1...v5.6.0) (2023-11-29)
 
 
