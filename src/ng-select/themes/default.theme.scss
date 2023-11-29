@@ -250,6 +250,9 @@ $ng-select-value-font-size: 0.9em !default;
     .ng-dropdown-header {
         border-bottom: 1px solid $ng-select-border;
         padding: 5px 7px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 5px;
     }
     .ng-dropdown-footer {
         border-top: 1px solid $ng-select-border;

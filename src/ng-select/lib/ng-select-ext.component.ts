@@ -43,11 +43,7 @@ import { isDefined, isObject } from './value-utils';
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    role: 'listbox',
-    '[class.ng-select]': 'useDefaultClass',
-    '[class.ng-select-single]': '!multiple',
-  },
+
 })
 export class NgSelectExtComponent extends NgSelectComponent {
   // integrated select all header. Will be replaced if header template is used. Only available if fastSelection is enabled
@@ -63,6 +59,7 @@ export class NgSelectExtComponent extends NgSelectComponent {
   // integrated cancel/ok buttons as footer. Only trigger model update if 'OK' is clicked or clicked outside
   @Input() displayActionButtons = true;
   // change layout to mobile
+  @Input() searchPlaceholder = ''
   @Input() isMobile = false;
   // data change event will only emit if selection changed.
   @Input() emitDataChange = true;

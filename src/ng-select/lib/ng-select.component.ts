@@ -60,23 +60,15 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
 
 @Component({
   selector: 'ng-select',
-  templateUrl: './ng-select.component.html',
-  styleUrls: ['./ng-select.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NgSelectComponent),
-      multi: true,
-    },
-    NgDropdownPanelService,
-  ],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    role: 'listbox',
-    '[class.ng-select]': 'useDefaultClass',
-    '[class.ng-select-single]': '!multiple',
-  },
+    templateUrl: './ng-select.component.html',
+    styleUrls: ['./ng-select.component.scss'],
+    providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => NgSelectComponent),
+    multi: true
+    }, NgDropdownPanelService],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush  
 })
 export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, ControlValueAccessor {
   @Input() bindLabel: string;
@@ -193,13 +185,17 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
   @ViewChild('searchInput', { static: true }) searchInput: ElementRef<HTMLInputElement>;
   @ContentChildren(NgOptionComponent, { descendants: true }) ngOptions: QueryList<NgOptionComponent>;
 
-  @HostBinding('class.ng-select-disabled') get disabled() {
-    return this.readonly || this._disabled;
-  }
 
-  @HostBinding('class.ng-select-filtered') get filtered() {
-    return (!!this.searchTerm && this.searchable) || this._isComposing;
-  }
+  @HostBinding('class.ng-select') useDefaultClass = true;
+
+  @HostBinding('class.ng-select-disabled') get disabled() { return this.readonly || this._disabled };
+
+  @HostBinding('class.ng-select-filtered') get filtered() { return (!!this.searchTerm && this.searchable || this._isComposing) };
+
+  @HostBinding('class.ng-select-single') get single() { return !this.multiple };
+
+
+ 
 
   itemsList: ItemsList;
   viewPortItems: NgOption[] = [];
@@ -208,7 +204,7 @@ export class NgSelectComponent implements OnDestroy, OnChanges, AfterViewInit, C
   element: HTMLElement;
   focused: boolean;
   @Input() escapeHTML = true;
-  useDefaultClass = true;
+  
 
   private _items = [];
   private _itemsAreUsed: boolean;

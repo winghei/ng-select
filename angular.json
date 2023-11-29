@@ -1,5 +1,11 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
+  },
   "version": 1,
   "newProjectRoot": "src",
   "projects": {
@@ -10,7 +16,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "src/ng-select/tsconfig.lib.json",
             "project": "src/ng-select/ng-package.json"
@@ -33,14 +39,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "src/ng-select/tsconfig.lib.json",
-              "src/ng-select/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/ng-select/**/*.ts",
+              "src/ng-select/**/*.html"
             ]
           }
         }
@@ -80,14 +83,11 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/demo",
-            "showCircularDependencies": false,
             "index": "src/demo/index.html",
             "main": "src/demo/main.ts",
             "polyfills": "src/demo/polyfills.ts",
             "tsConfig": "src/demo/tsconfig.app.json",
-            "aot": true,
             "deployUrl": "/ng-select/",
-            "extractCss": true,
             "assets": [
               "src/demo/favicon.ico",
               "src/demo/assets"
@@ -95,7 +95,13 @@
             "styles": [
               "src/demo/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -108,7 +114,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -130,8 +135,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "demo:build",
-            "deployUrl": "/"
+            "browserTarget": "demo:build"
           },
           "configurations": {
             "production": {
@@ -148,15 +152,10 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "src/ng-option-highlight/tsconfig.lib.json",
             "project": "src/ng-option-highlight/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "src/ng-option-highlight/tsconfig.lib.prod.json"
-            }
           }
         },
         "test": {
@@ -164,26 +163,20 @@
           "options": {
             "main": "src/ng-option-highlight/test.ts",
             "tsConfig": "src/ng-option-highlight/tsconfig.spec.json",
-            "karmaConfig": "src/ng-option-highlight/karma.conf.js"
+            "karmaConfig": "src/ng-option-highlight/karma.conf.js",
+            "watch": false
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "src/ng-option-highlight/tsconfig.lib.json",
-              "src/ng-option-highlight/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/ng-option-highlight/**/*.ts",
+              "src/ng-option-highlight/**/*.html"
             ]
           }
         }
       }
     }
-  },
-  "defaultProject": "demo",
-  "cli": {
-    "analytics": "130cfc4f-21b2-410e-a026-9fb503e1b107"
   }
 }

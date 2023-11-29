@@ -48,6 +48,7 @@ import { VirtualScrollExampleComponent } from './virtual-scroll-example/virtual-
 import { SearchEditableExampleComponent } from './search-editable-example/search-editable-example.component';
 import { NgSelectExtendedExampleComponent } from './ng-select-extended-example/ng-select-extended-example.component';
 import { NgSelectExtendedSingleSelectComponent } from './ng-select-extended-single-select/ng-select-extended-single-select.component';
+import { NgSelectExtendedExampleCustomPanelHeaderComponent } from './ng-select-extended-example-custom-panel-header/ng-select-extended-example-custom-panel-header.component';
 
 const examples = [DataSourceBackendExampleComponent,
     DataSourceArrayExampleComponent,
@@ -93,6 +94,7 @@ const examples = [DataSourceBackendExampleComponent,
     GroupChildrenExampleComponent,
     SearchEditableExampleComponent,
     NgSelectExtendedExampleComponent,
+    NgSelectExtendedExampleCustomPanelHeaderComponent,
     NgSelectExtendedSingleSelectComponent
 ];
 

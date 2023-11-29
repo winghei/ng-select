@@ -1,0 +1,56 @@
+<p>Extended ng-select:
+    -added custom header tempalte
+</p>
+
+<ng-select-ext [items]="people"
+               [multiple]="true"
+               (dataChange)="dataChange($event)"
+               [(ngModel)]="selectedPeople">
+    <ng-template ng-header-tmp
+                 let-context="context">
+        <div *ngIf="context.isMobile"
+             class="mobile-header">
+            <div class="placeholder">{{ context.placeholder }}</div>
+            <span class="ng-value-icon"
+                  (click)="context.close()"
+                  aria-hidden="true">×</span>
+        </div>
+        <div class="ng-input ng-search-input">
+            <input style="width: 100%;border-radius: 4px;padding: 0 4px;"
+                   #inlineSearchInput
+                   id="labelForId"
+                   [readOnly]="context.itemsList.maxItemsSelected"
+                   [disabled]="context.disabled"
+                   [value]="context.searchTerm ? context.searchTerm : ''"
+                   (input)="context.filter(inlineSearchInput.value)"
+                   (compositionstart)="context.onCompositionStart()"
+                   [placeholder]="context.searchPlaceholder"
+                   (compositionend)="context.onCompositionEnd(inlineSearchInput.value)"
+                   (change)="$event.stopPropagation()"
+                   (blur)="context.focus()"
+                   role="combobox"
+                   [attr.aria-expanded]="context.isOpen"
+                   [attr.aria-owns]="context.isOpen ? context.dropdownId : null"
+                   [attr.aria-activedescendant]="context.isOpen ? context.itemsList?.markedItem?.htmlId : null" />
+        </div>
+        <div class="select-all"
+             *ngIf="context.displaySelectAll && context.viewPortItems.length">
+            <input id="selectAll"
+                   type="checkbox"
+                   [checked]="context.selected_all"
+                   (change)="context.selectAll($event)" />
+            <label for="selectAll"> Select all {{ context.searchTerm ? 'search results' : '' }} </label>
+        </div>
+    </ng-template>
+</ng-select-ext>
+
+<br>
+<small>{{selectedPeople.length <= 3
+       ||
+       selectedPeople.items
+       ?
+       (selectedPeople
+       |
+       json)
+       :
+       selectedPeople.length}}</small>
