@@ -120,7 +120,7 @@
                    [appendTo]="appendTo"
                    [position]="dropdownPosition"
                    [headerTemplate]="headerTemplate || defaultHeaderTemplate"
-                   [footerTemplate]="displayActionButtons ? actionButtonsTemplate : footerTemplate"
+                   [footerTemplate]="displayActionButtons ? footerTemplate || actionButtonsTemplate : footerTemplate"
                    [filterValue]="searchTerm"
                    [items]="itemsList.filteredItems"
                    [markedItem]="itemsList.markedItem"
