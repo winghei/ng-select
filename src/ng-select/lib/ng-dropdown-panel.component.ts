@@ -144,7 +144,11 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
     scrollDebounce: any;
     time = Date.now();
     scrollEvent = ($event) => {
+      
+        if ($event.target == this.scrollElementRef.nativeElement)
+            return;
         this.throttle(() => {
+
             this.resetScrollHeight(this._panelService.dimensions.itemHeight);
             if (this.scrollElementRef && this.isSelectVisible())
                 this.adjustPosition();
@@ -373,7 +377,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
                 parents.push(el);
         }
         // exclude the parent container
-       
+
         let is_hidden = false;
         parents.find(el => {
             is_hidden = !this.isElementVisible(this._select, el)
