@@ -144,11 +144,10 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
     scrollDebounce: any;
     time = Date.now();
     scrollEvent = ($event) => {
-      
-        if ($event.target == this.scrollElementRef.nativeElement)
+        // do nothing if is mobile or no event
+        if (this.context.isMobile || !$event || $event.target == this.scrollElementRef.nativeElement)
             return;
         this.throttle(() => {
-
             this.resetScrollHeight(this._panelService.dimensions.itemHeight);
             if (this.scrollElementRef && this.isSelectVisible())
                 this.adjustPosition();
