@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.3](https://github.com/winghei/ng-select/compare/v5.6.2...v5.6.3) (2024-04-17)
+
+
+### Bug Fixes
+
+* **ng-dropdown-panel:** Fixed undefined event when reference is destroyed. Disable scrollevent when component isMobile. ([d5d9338](https://github.com/winghei/ng-select/commit/d5d933891b0d95a1dc73f34d3f0a7840b902d334))
+
 ### [5.6.2](https://github.com/winghei/ng-select/compare/v5.6.1...v5.6.2) (2023-11-29)
 
 
