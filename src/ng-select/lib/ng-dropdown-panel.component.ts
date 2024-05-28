@@ -172,7 +172,7 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
 
     ngOnInit() {
         if (this.context.appendTo == 'body')
-            window.addEventListener('scroll', this.scrollEvent, true); //third parameter
+            window.addEventListener('scroll', this.scrollEvent,true); //third parameter
         this._select = this._dropdown.parentElement;
         this._virtualPadding = this.paddingElementRef.nativeElement;
         this._scrollablePanel = this.scrollElementRef.nativeElement;
@@ -391,8 +391,8 @@ export class NgDropdownPanelComponent implements OnInit, OnChanges, OnDestroy, A
         const holderRect = holder.getBoundingClientRect()
 
         return top <= holderRect.top
-            ? holderRect.top - top <= 0
-            : bottom - holderRect.bottom <= 0
+            ? holderRect.top - top <= height /2
+            : bottom - holderRect.bottom <= height /2
     }
 
     private _onContentScrolled(scrollTop: number) {
