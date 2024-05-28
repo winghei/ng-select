@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.6.4](https://github.com/winghei/ng-select/compare/v5.6.3...v5.6.4) (2024-05-28)
+
+
+### Bug Fixes
+
+* **ng-dropdown-panel:** Added padding based on height of dropdown when dropdown panel needs to hide ([5065d86](https://github.com/winghei/ng-select/commit/5065d867f60e31d26fb5ef4afdd4fedffaba92c3))
+
 ### [5.6.3](https://github.com/winghei/ng-select/compare/v5.6.2...v5.6.3) (2024-04-17)
 
 
