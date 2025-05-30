@@ -128,7 +128,7 @@
                    (scroll)="scroll.emit($event)"
                    (keydown)="handleKeyDown($event)"
                    (scrollToEnd)="scrollToEnd.emit($event)"
-                   (outsideClick)="commit_changes = true; close()"
+                   (outsideClick)="displayActionButtons ? commit_changes = false: commit_changes = true ;close()"
                    [class.ng-select-multiple]="multiple"
                    [ngClass]="appendTo ? classes : null"
                    [id]="dropdownId">
